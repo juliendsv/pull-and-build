@@ -1,0 +1,13 @@
+#!/bin/bash
+# Will git pull and build all your Go stuff
+# Great if you have lots of repo ..
+#
+# Ex: cd ~/src/github.com/your-org/;update-build;
+
+for file in *; do
+  [[ -d $file && -d $file/.git ]] || continue
+  cd $file
+  ${GIT:-git} pull >& /dev/null
+  ${GO:-go} get
+  cd ..
+done
